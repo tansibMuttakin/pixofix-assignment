@@ -51,6 +51,24 @@ yarn && yarn dev
  php artisan serve
 ```
 
+### 7. Start the Reverb Server
+
+ ```bash
+ php artisan reverb:start
+```
+
+### 8. Test Credentials
+
+Admin credentials:
+
+email: admin@example.com
+password: password
+
+Employee credentials
+
+email: employee1@example.com
+password: password
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

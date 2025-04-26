@@ -46,7 +46,7 @@ class FileService
 
         $action = 'File status updated to ' . $data['status'];
 
-        event(new FileAction($file, User::find($userId)->first(), $action));
+        FileAction::dispatch($file, User::find($userId)->first(), $action);
 
 
         return $file;

@@ -6,8 +6,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('admin-dashboard', function ($user) {
-    // You can customize the access here
-    // return $user != null;
+Broadcast::channel('admin-dashboard', function () {
     return true;
 });

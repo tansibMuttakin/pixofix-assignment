@@ -44,7 +44,7 @@ class FileAction implements ShouldBroadcastNow
     public function broadcastOn()
     {
         return [
-            new Channel('admin-dashboard')
+            new PrivateChannel('admin-dashboard.' . $this->user->id),
         ];
     }
 

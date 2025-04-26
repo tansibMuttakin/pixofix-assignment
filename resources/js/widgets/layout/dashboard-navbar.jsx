@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, usePage, router } from "@inertiajs/react";
+import useAuth from "../../Hooks/useAuth";
 import {
     Navbar,
     Typography,
@@ -27,9 +28,11 @@ export function DashboardNavbar() {
     const [fixedNavbar, setFixedNavbar] = useState(true); // You can control this however you want
     const [openSidenav, setOpenSidenav] = useState(false);
     const [openConfigurator, setOpenConfigurator] = useState(false);
+    const { user } = useAuth();
 
     useEffect(() => {
-        const channel = window.Echo.channel("admin-dashboard"); // Adjust the channel name to match your use case
+        const channel = window.Echo.private(`admin-dashboard.${user?.id}`);
+        console.log("channel", channel);
 
         channel.listen(".FileAction", (event) => {
             console.log("file Updated:", event);

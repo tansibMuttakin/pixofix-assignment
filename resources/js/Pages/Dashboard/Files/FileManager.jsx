@@ -10,8 +10,6 @@ import {
 import FilePreviewModal from "../../../components/Files/FilePreviewModal";
 
 const FileManager = ({ folders }) => {
-    const { folders: structuredFolders } = folders;
-
     const fileInputs = useRef({});
     const [collapsed, setCollapsed] = useState({});
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -185,9 +183,7 @@ const FileManager = ({ folders }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {structuredFolders.map((folder) =>
-                                renderRows(folder)
-                            )}
+                            {folders?.map((folder) => renderRows(folder))}
                         </tbody>
                     </table>
                 </CardBody>

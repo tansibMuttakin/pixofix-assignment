@@ -22,7 +22,7 @@ class FileService
         int $parentId,
         string $fileName,
         string $storedPath,
-        string $status = 'pending'
+        string $status = 'unclaimed'
     ) {
         return File::create([
             'order_id' => $orderId,

@@ -13,10 +13,10 @@ class OrderService
 {
     public static function create(array $data)
     {
-        //initiate DB transaction
-        DB::beginTransaction();
-
         try {
+            //initiate DB transaction
+            DB::beginTransaction();
+
             $orderCount = Order::count();
             $order = Order::create([
                 'title' => $data['title'],
@@ -33,7 +33,7 @@ class OrderService
             // Rollback the transaction
             DB::rollBack();
 
-            return $e;
+            throw $e;
         }
 
 

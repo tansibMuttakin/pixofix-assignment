@@ -126,8 +126,13 @@ class FileController extends Controller
                 ];
             });
 
+            $allFolders = $structuredOrders->pluck('folders') // Get the folders arrays
+                ->flatten(1);       // Flatten them into one list
+            // dd([
+            //     'folders' => $allFolders,
+            // ]);
             return Inertia::render('Dashboard/Files/Index', [
-                'structuredOrders' => $structuredOrders,
+                'structuredOrders' => $allFolders,
             ]);
         } catch (Exception $e) {
             throw $e;
@@ -150,5 +155,22 @@ class FileController extends Controller
             DB::rollBack();
             throw $e;
         }
+    }
+
+    public function showImage(Request $request)
+    {
+        $path = $request->path;
+        if (!Storage::exists($path)) {
+            abort(404, "File not found");
+        }
+
+        $mimeType = Storage::mimeType($path);
+
+        return response()->stream(function () use ($path) {
+            echo Storage::get($path);
+        }, 200, [
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
+        ]);
     }
 }

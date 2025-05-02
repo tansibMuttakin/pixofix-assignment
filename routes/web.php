@@ -67,6 +67,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
         Route::get('/', [FileController::class, 'index'])->name('file.index');
         //now create route to claim files by employees 
         Route::post('/claim-files', [FileController::class, 'claimFiles'])->name('claim-files');
+        Route::get('/preview', [FileController::class, 'showImage'])->name('files.preview');
         Route::get('/{orderId}', [FileController::class, 'show'])->name('files.show');
         Route::post('/{file}/update', [FileController::class, 'update'])->name('files.update');
         // Route to get files batchUpdateStatus
@@ -89,19 +90,5 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
     });
 });
-
-Route::get('/files/{filePath?}', function ($filePath = '') {
-    $decodedPath = urldecode($filePath);
-    $path = "private/{$decodedPath}";
-
-    if (!Storage::exists($path)) {
-        abort(404);
-    }
-
-    return response()->file(storage_path("app/{$path}"));
-})
-    ->where('filePath', '.*')
-    ->middleware('auth')
-    ->name('files.show');
 
 require __DIR__ . '/auth.php';

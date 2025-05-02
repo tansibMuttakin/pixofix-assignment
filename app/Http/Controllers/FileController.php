@@ -29,7 +29,7 @@ class FileController extends Controller
     {
         // Validate the request
         $request->validate([
-            'status' => 'required|string|in:in_progress,completed',
+            'status' => 'required|string|in:in_progress,completed,unclaimed',
         ]);
 
         try {

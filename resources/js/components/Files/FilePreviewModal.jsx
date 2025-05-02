@@ -6,7 +6,6 @@ export default function FilePreviewModal({
     previewName,
     setPreviewUrl,
     setPreviewName,
-    orderId,
 }) {
     console.log(previewUrl);
     const encodedPath = encodeURIComponent(previewUrl);

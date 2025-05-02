@@ -9,12 +9,18 @@ import {
 import { router } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import StatusModal from "../Files/StatusModal";
+import FilePreviewModal from "../Files/FilePreviewModal";
 
 export default function ClaimedFilesTable({ files }) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewName, setPreviewName] = useState("");
 
-    const viewHanlder = (fileId) => {};
+    const viewHanlder = (fileName, filePath) => {
+        setPreviewUrl(filePath);
+        setPreviewName(fileName);
+    };
 
     const handleOpenModal = (file) => {
         setSelectedFile(file);
@@ -123,7 +129,10 @@ export default function ClaimedFilesTable({ files }) {
                                                     color="blue-gray"
                                                     className="text-xs font-semibold text-blue-600"
                                                     onClick={(e) => {
-                                                        viewHanlder(file.id);
+                                                        viewHanlder(
+                                                            file.file_name,
+                                                            file.file_path
+                                                        );
                                                     }}
                                                 >
                                                     view
@@ -156,6 +165,15 @@ export default function ClaimedFilesTable({ files }) {
                 updateHandler={updateHandler}
                 file={selectedFile}
             />
+
+            {previewUrl && (
+                <FilePreviewModal
+                    previewName={previewName}
+                    previewUrl={previewUrl}
+                    setPreviewName={setPreviewName}
+                    setPreviewUrl={setPreviewUrl}
+                />
+            )}
         </>
     );
 }

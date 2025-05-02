@@ -182,7 +182,6 @@ export function ClaimFilesTable({ files, order }) {
                 <FilePreviewModal
                     previewName={previewName}
                     previewUrl={previewUrl}
-                    orderId={orderId}
                     setPreviewName={setPreviewName}
                     setPreviewUrl={setPreviewUrl}
                 />

@@ -193,7 +193,6 @@ const FileManager = ({ folders }) => {
                 <FilePreviewModal
                     previewName={previewName}
                     previewUrl={previewUrl}
-                    orderId={orderId}
                     setPreviewName={setPreviewName}
                     setPreviewUrl={setPreviewUrl}
                 />

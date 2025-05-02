@@ -29,7 +29,7 @@ const StatusModal = ({ modalOpen, onClose, updateHandler, file }) => {
                     >
                         <Option value="in_progress">In Progress</Option>
                         <Option value="completed">Completed</Option>
-                        <Option value="pending">Pending</Option>
+                        {/* <Option value="unclaimed">Unclaim</Option> */}
                     </Select>
                 </div>
             </DialogBody>

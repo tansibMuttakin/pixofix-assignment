@@ -15,7 +15,11 @@ export default function Index({ orders }) {
             <Dashboard>
                 <div className="mt-12 mb-12 flex justify-end">
                     {isAdmin && (
-                        <Button variant="gradient" onClick={handleOpen}>
+                        <Button
+                            variant="gradient"
+                            color="green"
+                            onClick={handleOpen}
+                        >
                             Create Order
                         </Button>
                     )}

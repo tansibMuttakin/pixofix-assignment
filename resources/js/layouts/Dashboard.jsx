@@ -70,7 +70,7 @@ export function Dashboard({ children }) {
                 routes={routes}
                 openSidenav={openSidenav}
                 setOpenSidenav={setOpenSidenav}
-                brandName="My App"
+                brandName={isAdmin ? "Admin Dashboard" : "Employee Dashboard"}
                 sidenavType="dark"
                 sidenavColor="blue"
             />

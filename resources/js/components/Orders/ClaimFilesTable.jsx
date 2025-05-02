@@ -10,9 +10,19 @@ import { useState } from "react";
 import { projectsTableData } from "@/data/projectsTableData";
 import { router } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import FilePreviewModal from "../Files/FilePreviewModal";
 
 export function ClaimFilesTable({ files, order }) {
     const [selectedFileIds, setSelectedFileIds] = useState([]);
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewName, setPreviewName] = useState("");
+    const [orderId, setOrderId] = useState(null);
+
+    const viewHanlder = (fileName, filePath) => {
+        setOrderId(order?.id);
+        setPreviewUrl(filePath);
+        setPreviewName(fileName);
+    };
 
     const toggleFileSelection = (fileId) => {
         setSelectedFileIds((prev) =>
@@ -87,7 +97,13 @@ export function ClaimFilesTable({ files, order }) {
                         <tbody>
                             {files.map(
                                 (
-                                    { id, file_name, status, created_at },
+                                    {
+                                        id,
+                                        file_name,
+                                        file_path,
+                                        status,
+                                        created_at,
+                                    },
                                     key
                                 ) => {
                                     const className = `py-3 px-5 ${
@@ -142,6 +158,12 @@ export function ClaimFilesTable({ files, order }) {
                                                         as="a"
                                                         href="#"
                                                         className="text-xs font-semibold text-blue-600"
+                                                        onClick={(e) => {
+                                                            viewHanlder(
+                                                                file_name,
+                                                                file_path
+                                                            );
+                                                        }}
                                                     >
                                                         view
                                                     </Typography>
@@ -155,6 +177,16 @@ export function ClaimFilesTable({ files, order }) {
                     </table>
                 </CardBody>
             </Card>
+
+            {previewUrl && (
+                <FilePreviewModal
+                    previewName={previewName}
+                    previewUrl={previewUrl}
+                    orderId={orderId}
+                    setPreviewName={setPreviewName}
+                    setPreviewUrl={setPreviewUrl}
+                />
+            )}
         </div>
     );
 }
